@@ -1,4 +1,4 @@
-export function StoreIOS() {
+function StoreIOS() {
 }
 
 StoreIOS.prototype.append = function(file, obj) {
