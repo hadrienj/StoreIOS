@@ -8,13 +8,13 @@ The StoreIOS module is used to store and fetch documents on an iOS device throug
 ```javascript
 document.addEventListener("deviceready", function() {
   var storeIOS = new StoreIOS();
-  storeIOS.append('fileName1.txt', 'Ceci est un test.');
+  storeIOS.append('fileName1.txt', 'Ceci est un test');
 });
 ```
 
-This will create a file named 'fileName1.txt' containing 'Ceci est un test.' in the `Documents` folder of the application.
+This will create a file named `fileName1.txt` containing 'Ceci est un test' in the `Documents` folder of the application.
 
-If the file 'fileName.txt' does not exist it will be created.
+If the file `fileName.txt` does not exist it will be created.
 
 The file can be retrieve with iTunes if the option `Application supports iTunes file sharing` is set to `YES` in the application's `.plist` file.
 
@@ -25,14 +25,15 @@ document.addEventListener("deviceready", function() {
   storeIOS.read('fileName1.txt', callback);
 
   function callback(file) {
-    document.getElementById('divToFill').innerHTML = file;
+    // do something with the file
+    document.getElementById('divToFill').innerHTML = file.result;
   }
 });
 ```
 
-This will get the content of the file 'fileName1.txt' and display it in a HTML div.
+This will read the file object `fileName1.txt` and use the `result` property to display its content in a HTML div. See the different properties and methods of the Reader object [here](http://docs.phonegap.com/en/edge/cordova_file_file.md.html#FileReader).
 
-The `read()` method requires the file name as first argument and the function using the file content as a second argument. In this example, the callback use the file content to display it.
+The `read()` method requires the file name as first argument and the callback function using the file content as a second argument.
 
 ## Get file list
 
@@ -58,7 +59,9 @@ document.addEventListener("deviceready", function() {
 });
 ```
 
-In this example, we get a list of each files in the Documents folder of the application.
+The `getList` method takes only one argument: the callback function using the retrieved list of files present in the Document folder of the application. The list is an array of file names (e.g. `['file1.txt', 'file2.txt', 'test.json']`).
+
+In this example, we get the list of files, iterate on this list and select only the `.txt` files. We then add these file names in a new array after removing the file extension `.txt`.
 
 # Dependencies
 

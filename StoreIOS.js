@@ -1,4 +1,4 @@
-function StoreIOS() {
+export function StoreIOS() {
 }
 
 StoreIOS.prototype.append = function(file, obj) {
@@ -42,8 +42,8 @@ StoreIOS.prototype.read = function(file, callback) {
       fileEntry.file(function (file) {
         var reader = new FileReader();
         reader.onloadend = function() {
-          console.log("Successful file read: " + this.result);
-          callback(this.result);
+          console.log("Successful file read: " + this);
+          callback(this);
         };
         reader.readAsText(file);
       }, function() {console.log('error read')});
